@@ -1,17 +1,10 @@
 # inclass11
 
-A new Flutter project.
+A teammate "improves" Step 5 by changing pushReplacement to push so guests can "peek back at the form." Diagram the navigation stack after three submissions under each version, predict exactly what the system Back button does at the Ballroom each time — then capture what your app actually does after the swap (screenshot the stack or the behavior) and reconcile your prediction with reality.
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
+Changing pushReplacement to push would allow guests to peek back at the data, but it would also resubmit any old forms. This would keep the signup screen inside the stack under the success screen. Using the system back button would keep the form info, but also the _submitting variable will be true, so you will not be able to submit the form. (SEE EVIDENCE FOLDER) What I predicted was a little different than what I saw, the form continuously submits the previous info on top of not being able to get into the ballroom.
 
-A few resources to get you started if this is your first Flutter project:
+After rotating your emulator mid-signup, one of your three values disappears while others survive. Identify which value haunts you in your build (name? toggle? birth date?), trace exactly where each value lives in your code (controller? State field? nothing?), explain why one survives rotation and another doesn't, and propose the smallest fix.
 
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+I already implemented this fix since I got a pixel overflow error, but if this happens, usually the bottom elements would be cut off with no way to access them. In this case, it's the Birthday selection. The _Birthdate state field stores the user's Birthday input into the field inside the stateful widget. The element gets cut off happens because there is not enough screen real estate to show every element at once, so the bottom elements get truncated and the user cannot see it. The easiest way to fix this would be to wrap the form() inside the scaffold with a SingleChildScrollView so that the guest can scroll and see the form data even when it gets cut off.
